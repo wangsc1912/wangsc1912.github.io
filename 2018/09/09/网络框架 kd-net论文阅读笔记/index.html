@@ -24,12 +24,12 @@ ga('send', 'pageview');
 <meta name="keywords" content="视觉求索">
 <meta property="og:type" content="article">
 <meta property="og:title" content="kd-net论文阅读笔记">
-<meta property="og:url" content="http://wangsc.site/2018/09/09/kd-net论文阅读笔记/index.html">
+<meta property="og:url" content="http://wangsc.site/2018/09/09/网络框架 kd-net论文阅读笔记/index.html">
 <meta property="og:site_name" content="Wang SC">
 <meta property="og:description" content="这篇文章提出一种新的针对三维点云数据的神经网络框架，其和 PointNet++ 一样很有创造性。Kd-network也想构造出像CNN那样对输入数据构建层次化的端到端的网络结构，来提取特征并完成任务。作者想到了古老的二叉树方法，并将巧妙地其应用在了这里，构造了针对点云数据的类似于CNN的网络结构。本文的基本结构是一个二叉树，文章先自顶向下地构架kd-tree，构建方法为，先看在三维坐标系中，点云在">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://pesfhrpeo.bkt.clouddn.com/%E5%9B%BE%E7%89%871.png">
-<meta property="og:updated_time" content="2018-10-14T04:00:43.727Z">
+<meta property="og:updated_time" content="2018-10-14T09:44:32.064Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="kd-net论文阅读笔记">
 <meta name="twitter:description" content="这篇文章提出一种新的针对三维点云数据的神经网络框架，其和 PointNet++ 一样很有创造性。Kd-network也想构造出像CNN那样对输入数据构建层次化的端到端的网络结构，来提取特征并完成任务。作者想到了古老的二叉树方法，并将巧妙地其应用在了这里，构造了针对点云数据的类似于CNN的网络结构。本文的基本结构是一个二叉树，文章先自顶向下地构架kd-tree，构建方法为，先看在三维坐标系中，点云在">
@@ -95,9 +95,9 @@ ga('send', 'pageview');
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-kd-net论文阅读笔记" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-网络框架 kd-net论文阅读笔记" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/09/09/kd-net论文阅读笔记/" class="article-date">
+    <a href="/2018/09/09/网络框架 kd-net论文阅读笔记/" class="article-date">
   <time datetime="2018-09-09T15:31:31.000Z" itemprop="datePublished">2018-09-09</time>
 </a>
     
@@ -118,12 +118,13 @@ ga('send', 'pageview');
     <div class="article-entry" itemprop="articleBody">
       
         <p><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script><br>这篇文章提出一种新的针对三维点云数据的神经网络框架，其和 PointNet++ 一样很有创造性。Kd-network也想构造出像CNN那样对输入数据构建层次化的端到端的网络结构，来提取特征并完成任务。作者想到了古老的二叉树方法，并将巧妙地其应用在了这里，构造了针对点云数据的类似于CNN的网络结构。<br>本文的基本结构是一个二叉树，文章先自顶向下地构架kd-tree，构建方法为，先看在三维坐标系中，点云在那个维度方向span得最宽，那么就垂直该轴将点云均等地一分为二，然后在子集上继续此操作，直至分为每个点。<a id="more"></a>其在二维坐标下的表示如下图所示：<br><img src="http://pesfhrpeo.bkt.clouddn.com/%E5%9B%BE%E7%89%871.png" alt="alt text"><br>Kd-network的构建也如上图（左）所示，特征表示为竖条，圆圈则类似于CNN中的神经元，其先对输入进行线性组合，再对其结果做非线性运算。最有意思的是，其也效仿了CNN中的共享权重（当然还是有所不同的），Kd-network中的每一层，如果其切割的坐标轴是一致的，则其共享权重，也就是说每层中其实只要学习三组权重，这样可以有效降低参数量。如上图中叶节点一层，三个绿色的圆圈就是分割坐标轴一致（都对x轴切分），所以共享了线性组合的权重。<br>论文中，作者先考虑了网络的输入。这部分感觉作者没有说清楚，他其实是介绍了一下输入的点和kd-tree的构造。个人认为，网络的输入包括两部分。最直接最根本的输入当然是原始点云，可以仅仅是点的坐标，也可以包括颜色，法线角度等原始特征。但也要注意，由于kd-tree的结构限制，点云中的点数必须由kd-tree的层数D决定，如果是任意点数的点云，则必须对其进行采样至2的D次方个点。这个缺点也和CNN是一样的。从这方面来看，Kd-network是要逊于PointNet++ 的，PointNet可以通过grouping，直接对任意大小点云进行处理。另一种隐式的输入是kd-tree，以及划分子集所沿的坐标轴。Kd-tree的划分决定了每个点和其他层特征所用的神经元（沿x轴，沿y轴，沿z轴）。对这个部分仍有疑问。Kd-network中只有叶节点对应于原始的点，其他层则都已经是抽象过的特征了，那么是否还有必要将kd-network的结构和kd-tree的结构严格对应？（比如，kd-tree的第l层中的某两个子集是沿x轴方向划分的，那么kd-network该处是否就必须用对应于x轴的神经元？）如果类比CNN来考虑，那么network和tree的结构应该是要对应的，CNN中就是已将图像抽象过了，但高层中仍然是对应于原始图像的固定的感受野。<br>作者接下来考虑了数据在网络中的处理。其层次化的逐级抽象过程其实就是DNN的前向传播，每一个节点的运算如下：</p>
-<p>具体使用哪组仿射变换取决于对应的分割方向。最终生成根节点的特征V1后，再输入分类器，得到最终的分类得分：<br>$$v_{0}(T)=W^{0}v_{1}(T)+b^{0}$$<br>之后作者又分析了一下Kd-network的性质，基本上是完美继承了CNN的性质。第一是层内参数共享。第二是层级化的特征表示。另外，由于它的分割阀门其实并没有体现在前向传播的公式里，因而其实它也对输入点云的微小抖动是鲁棒的。最后Kd-network也继承了CNN的缺点，即缺乏旋转不变性（图像旋转后CNN每个filter处理的内容发生变化，而点云旋转后，kd-tree的分割轴向会发生变化）。<br>作者接下来又探讨了一下对于分割任务的结构设计。由于分割任务是要对每个点分类，所以最后应该输出每个点属于每一类的概率。即输出向量个数要等于输入点数。为此，作者设计了一种类似于encoder-decoder的结构，也很有意思。另外还使用了 skip connection，在decoder部分，神经元的输出是由上层输入进行处理后的特征串联上skip connection输出的特征，作为神经元的输出特征。<br>但奇怪的是，虽然kd-network的构思很新奇很有创新性，但是其性能却没有大幅超越state of the art，其每项指标基本都不是第一。这一点个人暂时还没有想通，我觉得可能是CNN的架构和性质有的地方可能并不适合三维点云，另外kd-tree的划分和kd-network本身可能也有待改进的地方。</p>
+<p>具体使用哪组仿射变换取决于对应的分割方向。最终生成根节点的特征V1后，再输入分类器，得到最终的分类得分：</p>
+<p>$$v_{0}(T)=W^{0}v_{1}(T)+b^{0}$$<br>之后作者又分析了一下Kd-network的性质，基本上是完美继承了CNN的性质。第一是层内参数共享。第二是层级化的特征表示。另外，由于它的分割阀门其实并没有体现在前向传播的公式里，因而其实它也对输入点云的微小抖动是鲁棒的。最后Kd-network也继承了CNN的缺点，即缺乏旋转不变性（图像旋转后CNN每个filter处理的内容发生变化，而点云旋转后，kd-tree的分割轴向会发生变化）。<br>作者接下来又探讨了一下对于分割任务的结构设计。由于分割任务是要对每个点分类，所以最后应该输出每个点属于每一类的概率。即输出向量个数要等于输入点数。为此，作者设计了一种类似于encoder-decoder的结构，也很有意思。另外还使用了 skip connection，在decoder部分，神经元的输出是由上层输入进行处理后的特征串联上skip connection输出的特征，作为神经元的输出特征。<br>但奇怪的是，虽然kd-network的构思很新奇很有创新性，但是其性能却没有大幅超越state of the art，其每项指标基本都不是第一。这一点个人暂时还没有想通，我觉得可能是CNN的架构和性质有的地方可能并不适合三维点云，另外kd-tree的划分和kd-network本身可能也有待改进的地方。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://wangsc.site/2018/09/09/kd-net论文阅读笔记/" data-id="cjn8cdds00000okvtglt3udda" class="article-share-link">Share</a>
+      <a data-url="http://wangsc.site/2018/09/09/网络框架 kd-net论文阅读笔记/" data-id="cjn8qhth80004l8vtmt0xicer" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/视觉求索/">视觉求索</a></li></ul>
@@ -133,6 +134,15 @@ ga('send', 'pageview');
   
     
 <nav id="article-nav">
+  
+    <a href="/2018/10/14/DeepFace论文阅读笔记/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          DeepFace 论文阅读笔记
+        
+      </div>
+    </a>
   
   
     <a href="/2018/07/09/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
@@ -175,7 +185,7 @@ ga('send', 'pageview');
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a></li></ul>
     </div>
   </div>
 
@@ -188,7 +198,11 @@ ga('send', 'pageview');
       <ul>
         
           <li>
-            <a href="/2018/09/09/kd-net论文阅读笔记/">kd-net论文阅读笔记</a>
+            <a href="/2018/10/14/DeepFace论文阅读笔记/">DeepFace 论文阅读笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2018/09/09/网络框架 kd-net论文阅读笔记/">kd-net论文阅读笔记</a>
           </li>
         
           <li>

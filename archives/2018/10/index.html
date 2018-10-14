@@ -18,13 +18,13 @@ ga('send', 'pageview');
 
 
   
-  <title>Wang SC</title>
+  <title>Archives: 2018/10 | Wang SC</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="on the run">
 <meta name="keywords" content="Computer Vision">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Wang SC">
-<meta property="og:url" content="http://wangsc.site/index.html">
+<meta property="og:url" content="http://wangsc.site/archives/2018/10/index.html">
 <meta property="og:site_name" content="Wang SC">
 <meta property="og:description" content="on the run">
 <meta property="og:locale" content="default">
@@ -94,141 +94,36 @@ ga('send', 'pageview');
       <div class="outer">
         <section id="main">
   
-    <article id="post-DeepFace论文阅读笔记" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/10/14/DeepFace论文阅读笔记/" class="article-date">
-  <time datetime="2018-10-14T09:45:31.000Z" itemprop="datePublished">2018-10-14</time>
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2018" class="archive-year">2018</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2018/10/14/DeepFace论文阅读笔记/" class="archive-article-date">
+  <time datetime="2018-10-14T09:45:31.000Z" itemprop="datePublished">Oct 14</time>
 </a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
+      
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/10/14/DeepFace论文阅读笔记/">DeepFace 论文阅读笔记</a>
+      <a class="archive-article-title" href="/2018/10/14/DeepFace论文阅读笔记/">DeepFace 论文阅读笔记</a>
     </h1>
   
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>本文是人脸识别领域的一篇baseline，发表于2014年CVPR。当时人脸识别领域的主流工作还是基于手工特征，进行多种特征融合，再用度量学习使相同类样本的特征距离变小。而本文首先提出了基于深度学习的人脸识别方法，而且确实获得了较大的性能提升。<br>先看一下作者提到的贡献：</p>
-<blockquote>
-<ol>
-<li>设计了一种高效的DNN，可以利用很大的带标签人脸数据集来获得有较好泛化能力的人脸表征(face representation)。</li>
-<li>提出了基于3D人脸模型的高效的人脸对齐系统。</li>
-<li>较好的实验性能。其中，DNN的使用主要对应于第一点贡献。</li>
-</ol>
-</blockquote>
-        
-          <p class="article-more-link">
-            <a href="/2018/10/14/DeepFace论文阅读笔记/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://wangsc.site/2018/10/14/DeepFace论文阅读笔记/" data-id="cjn8qhtgt0000l8vtgzm9dysn" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/视觉求索/">视觉求索</a></li></ul>
-
-    </footer>
+    </header>
   </div>
-  
 </article>
-
-
   
-    <article id="post-网络框架 kd-net论文阅读笔记" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/09/09/网络框架 kd-net论文阅读笔记/" class="article-date">
-  <time datetime="2018-09-09T15:31:31.000Z" itemprop="datePublished">2018-09-09</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/09/09/网络框架 kd-net论文阅读笔记/">kd-net论文阅读笔记</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script><br>这篇文章提出一种新的针对三维点云数据的神经网络框架，其和 PointNet++ 一样很有创造性。Kd-network也想构造出像CNN那样对输入数据构建层次化的端到端的网络结构，来提取特征并完成任务。作者想到了古老的二叉树方法，并将巧妙地其应用在了这里，构造了针对点云数据的类似于CNN的网络结构。<br>本文的基本结构是一个二叉树，文章先自顶向下地构架kd-tree，构建方法为，先看在三维坐标系中，点云在那个维度方向span得最宽，那么就垂直该轴将点云均等地一分为二，然后在子集上继续此操作，直至分为每个点。
-        
-          <p class="article-more-link">
-            <a href="/2018/09/09/网络框架 kd-net论文阅读笔记/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://wangsc.site/2018/09/09/网络框架 kd-net论文阅读笔记/" data-id="cjn8qhth80004l8vtmt0xicer" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/视觉求索/">视觉求索</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/07/09/hello-world/" class="article-date">
-  <time datetime="2018-07-09T15:31:31.000Z" itemprop="datePublished">2018-07-09</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/07/09/hello-world/">Hello World</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>This is my very first post. </p>
-<p>I’ve spent some time to build this site and customize the stlye, which makes me feel happy and fun. </p>
-<p>I built this site mainly to share <code>technic and research</code> thoughts in Computer Vision, record treasured memories, and push myself to write.<br>
-        
-          <p class="article-more-link">
-            <a href="/2018/07/09/hello-world/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://wangsc.site/2018/07/09/hello-world/" data-id="cjn8qhtgt0002l8vt3v2od1s4" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
+    </div></section>
   
 
 
