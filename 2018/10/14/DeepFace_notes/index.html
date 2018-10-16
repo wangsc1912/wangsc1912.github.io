@@ -20,19 +20,19 @@ ga('send', 'pageview');
   
   <title>DeepFace 论文阅读笔记 | Wang SC</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="本文是人脸识别领域的一篇baseline，发表于2014年CVPR。当时人脸识别领域的主流工作是基于手工特征，进行多种特征融合，再用度量学习使相同类样本的特征距离变小。而本文首先提出了基于深度学习的人脸识别方法，而且确实获得了较大的性能提升。本文主要是针对人脸识别的 检测 - 对齐 - 表征 - 分类 四步中的 对齐 和 表征 两步进行改进的。先看一下作者提到的贡献：   设计了一种高效的DNN，">
-<meta name="keywords" content="视觉求索">
+  <meta name="description" content="本文是人脸识别领域的一篇baseline，发表于2014年CVPR,主要针对人脸识别的 检测 - 对齐 - 表征 - 分类 过程中的 对齐 和 表征 两步进行改进。当时人脸识别领域的主流工作是基于手工特征，进行多种特征融合，再用度量学习使相同类样本的特征距离变小。而本文首先提出了基于深度学习的人脸识别方法，而且确实获得了较大的性能提升。先看一下作者提到的贡献：   设计了一种高效的DNN，可以利用">
+<meta name="keywords" content="视觉求索,人脸识别">
 <meta property="og:type" content="article">
 <meta property="og:title" content="DeepFace 论文阅读笔记">
 <meta property="og:url" content="http://wangsc.site/2018/10/14/DeepFace_notes/index.html">
 <meta property="og:site_name" content="Wang SC">
-<meta property="og:description" content="本文是人脸识别领域的一篇baseline，发表于2014年CVPR。当时人脸识别领域的主流工作是基于手工特征，进行多种特征融合，再用度量学习使相同类样本的特征距离变小。而本文首先提出了基于深度学习的人脸识别方法，而且确实获得了较大的性能提升。本文主要是针对人脸识别的 检测 - 对齐 - 表征 - 分类 四步中的 对齐 和 表征 两步进行改进的。先看一下作者提到的贡献：   设计了一种高效的DNN，">
+<meta property="og:description" content="本文是人脸识别领域的一篇baseline，发表于2014年CVPR,主要针对人脸识别的 检测 - 对齐 - 表征 - 分类 过程中的 对齐 和 表征 两步进行改进。当时人脸识别领域的主流工作是基于手工特征，进行多种特征融合，再用度量学习使相同类样本的特征距离变小。而本文首先提出了基于深度学习的人脸识别方法，而且确实获得了较大的性能提升。先看一下作者提到的贡献：   设计了一种高效的DNN，可以利用">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://wangsc.site/2018/10/14/DeepFace_notes/DeepFace框架.png">
-<meta property="og:updated_time" content="2018-10-15T04:40:35.341Z">
+<meta property="og:updated_time" content="2018-10-15T05:57:02.110Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DeepFace 论文阅读笔记">
-<meta name="twitter:description" content="本文是人脸识别领域的一篇baseline，发表于2014年CVPR。当时人脸识别领域的主流工作是基于手工特征，进行多种特征融合，再用度量学习使相同类样本的特征距离变小。而本文首先提出了基于深度学习的人脸识别方法，而且确实获得了较大的性能提升。本文主要是针对人脸识别的 检测 - 对齐 - 表征 - 分类 四步中的 对齐 和 表征 两步进行改进的。先看一下作者提到的贡献：   设计了一种高效的DNN，">
+<meta name="twitter:description" content="本文是人脸识别领域的一篇baseline，发表于2014年CVPR,主要针对人脸识别的 检测 - 对齐 - 表征 - 分类 过程中的 对齐 和 表征 两步进行改进。当时人脸识别领域的主流工作是基于手工特征，进行多种特征融合，再用度量学习使相同类样本的特征距离变小。而本文首先提出了基于深度学习的人脸识别方法，而且确实获得了较大的性能提升。先看一下作者提到的贡献：   设计了一种高效的DNN，可以利用">
 <meta name="twitter:image" content="http://wangsc.site/2018/10/14/DeepFace_notes/DeepFace框架.png">
   
     <link rel="alternate" href="/atom.xml" title="Wang SC" type="application/atom+xml">
@@ -117,15 +117,16 @@ ga('send', 'pageview');
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>本文是人脸识别领域的一篇baseline，发表于2014年CVPR。当时人脸识别领域的主流工作是基于手工特征，进行多种特征融合，再用度量学习使相同类样本的特征距离变小。而本文首先提出了基于深度学习的人脸识别方法，而且确实获得了较大的性能提升。本文主要是针对人脸识别的 <strong>检测 - 对齐 - 表征 - 分类</strong> 四步中的 <strong>对齐</strong> 和 <strong>表征</strong> 两步进行改进的。<br>先看一下作者提到的贡献：</p>
+        <p>本文是人脸识别领域的一篇baseline，发表于2014年CVPR,主要针对人脸识别的 <strong>检测 - 对齐 - 表征 - 分类</strong> 过程中的 <strong>对齐</strong> 和 <strong>表征</strong> 两步进行改进。当时人脸识别领域的主流工作是基于手工特征，进行多种特征融合，再用度量学习使相同类样本的特征距离变小。而本文首先提出了基于深度学习的人脸识别方法，而且确实获得了较大的性能提升。<br>先看一下作者提到的贡献：</p>
 <blockquote>
 <ol>
 <li>设计了一种高效的DNN，可以利用很大的带标签人脸数据集来获得有较好泛化能力的人脸表征(face representation)。</li>
 <li>提出了基于3D人脸模型的高效的人脸对齐系统。</li>
-<li>较好的实验性能。其中，DNN的使用主要对应于第一点贡献。</li>
+<li>较好的实验性能。</li>
 </ol>
 </blockquote>
 <a id="more"></a>
+<p>其中，DNN的使用主要对应于第一点贡献。</p>
 <hr>
 <p>看看这个DeepFace的特点。首先，其训练集和测试集可以有很大不同，即允许存在domain shift。其次，DeepFace 的人脸表征很紧凑 (compact)，维数不高。</p>
 <h3 id="人脸对齐"><a href="#人脸对齐" class="headerlink" title="人脸对齐"></a>人脸对齐</h3><p>作者认为，想要用DNN鲁棒地学习出人脸表征是高度依赖于人脸对齐(face alignment)的。因此，文章的第二个贡献就是针对于alignment的。之前的主流人脸对齐方法有：</p>
@@ -147,10 +148,10 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://wangsc.site/2018/10/14/DeepFace_notes/" data-id="cjn9sf2dm0003q8vtzzscorxc" class="article-share-link">Share</a>
+      <a data-url="http://wangsc.site/2018/10/14/DeepFace_notes/" data-id="cjn9tfwxa0004jwvth0bsm0ru" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/视觉求索/">视觉求索</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/人脸识别/">人脸识别</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/视觉求索/">视觉求索</a></li></ul>
 
     </footer>
   </div>
@@ -180,7 +181,7 @@ ga('send', 'pageview');
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/视觉求索/">视觉求索</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/人脸识别/">人脸识别</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/视觉求索/">视觉求索</a></li></ul>
     </div>
   </div>
 
@@ -190,7 +191,7 @@ ga('send', 'pageview');
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/视觉求索/" style="font-size: 10px;">视觉求索</a>
+      <a href="/tags/人脸识别/" style="font-size: 10px;">人脸识别</a> <a href="/tags/视觉求索/" style="font-size: 20px;">视觉求索</a>
     </div>
   </div>
 
