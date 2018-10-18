@@ -26,16 +26,16 @@ ga('send', 'pageview');
 <meta name="keywords" content="视觉求索,人脸识别">
 <meta property="og:type" content="article">
 <meta property="og:title" content="DeepFace 论文阅读笔记">
-<meta property="og:url" content="http://wangsc.site/2018/10/14/DeepFace_notes/index.html">
+<meta property="og:url" content="http://wangsc.site/2018/DeepFace_notes.html">
 <meta property="og:site_name" content="Wang SC">
 <meta property="og:description" content="本文是人脸识别领域的一篇baseline，发表于2014年CVPR,主要针对人脸识别的 检测 - 对齐 - 表征 - 分类 过程中的 对齐 和 表征 两步进行改进。当时人脸识别领域的主流工作是基于手工特征，进行多种特征融合，再用度量学习使相同类样本的特征距离变小。而本文首先提出了基于深度学习的人脸识别方法，而且确实获得了较大的性能提升。先看一下作者提到的贡献：   设计了一种高效的DNN，可以利用">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://wangsc.site/2018/10/14/DeepFace_notes/DeepFace框架.png">
+<meta property="og:image" content="http://wangsc.site/2018/DeepFace_notes/DeepFace框架.png">
 <meta property="og:updated_time" content="2018-10-15T05:57:02.110Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DeepFace 论文阅读笔记">
 <meta name="twitter:description" content="本文是人脸识别领域的一篇baseline，发表于2014年CVPR,主要针对人脸识别的 检测 - 对齐 - 表征 - 分类 过程中的 对齐 和 表征 两步进行改进。当时人脸识别领域的主流工作是基于手工特征，进行多种特征融合，再用度量学习使相同类样本的特征距离变小。而本文首先提出了基于深度学习的人脸识别方法，而且确实获得了较大的性能提升。先看一下作者提到的贡献：   设计了一种高效的DNN，可以利用">
-<meta name="twitter:image" content="http://wangsc.site/2018/10/14/DeepFace_notes/DeepFace框架.png">
+<meta name="twitter:image" content="http://wangsc.site/2018/DeepFace_notes/DeepFace框架.png">
   
     <link rel="alternate" href="/atom.xml" title="Wang SC" type="application/atom+xml">
   
@@ -99,7 +99,7 @@ ga('send', 'pageview');
       <div class="outer">
         <section id="main"><article id="post-DeepFace_notes" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/10/14/DeepFace_notes/" class="article-date">
+    <a href="/2018/DeepFace_notes.html" class="article-date">
   <time datetime="2018-10-14T09:45:31.000Z" itemprop="datePublished">2018-10-14</time>
 </a>
     
@@ -141,7 +141,7 @@ ga('send', 'pageview');
 </blockquote>
 <p>3D 模型当时已经较少使用，但是由于3D模型可以较好地对人脸的 <strong>平面外旋转(out-of-plane rotation)</strong> 进行align，因而本文仍然使用了这种方法。<br>本文人脸对齐的思路和其他文章类似，也是先检测出人脸的 <strong>关键点</strong> 或基准点(fiducial points)，然后利用这些关键点来指导 alignment。实现过程是先在2D图像上找 fiducial points，然后基于这些关键点来将2D人脸 warp 成 3D frontal mode（3D正面人脸）。<br>进行fiducial point detection时，本文是使用一个较简单的detector（即用SVR在原图的LBP描述子上进行回归），找出6个关键点，之后基于关键点进行一步 2D alignment，然后依据新的图像再做关键点检测，如此迭代进行，直至图像不再有明显变化。<br>由于2D alignment得到的结果不能校正out-of-plane rotation，所以还需通过3D alignment进一步校正。首先，再次使用SVR，找出另外67个fiducial points。对于3D generic shape model，本文是使用USF Human-ID数据库中3D scans的平均值，再加上后处理，使得其被表示成对齐的点。然后手工地在3D shape 上放置67个 anchor points，这样就可以将从图像上检测出来的67个 fiducial points 在3D model上找到对应点。在 3D model 上对齐后，再通过一个矩阵，将 3D model 映射到二维图像。<br>3D model 没有考虑到全视角映射和如表情之类的非刚体变换。为此还需要进行一步frontalization。<br>可以看到，本文所做的人脸对齐系统确实有较好的性能，不仅考虑到了 out-of-plane rotation，还进一步考虑表情变化的non-rigid deformation等现象。</p>
 <h3 id="网络设计"><a href="#网络设计" class="headerlink" title="网络设计"></a>网络设计</h3><p>接下来看看本文的网络结构，也就是representation部分的工作。网络结构如下：</p>
-<img src="/2018/10/14/DeepFace_notes/DeepFace框架.png" title="网络结构">
+<img src="/2018/DeepFace_notes/DeepFace框架.png" title="网络结构">
 <p>网络结构其实和introduction中的表述有些出入，在introduction中作者说”it is therefore possible to learn from the raw pixel RGB values, without any need to apply several layers of confolutions as is done in many other networks.” ，但实际的网络还是用了卷积层。先看前三层C1, M2, C3，这部分就是传统的 <strong>convolution block</strong> 。C1层使用了32个滤波器，size很大，为11×11×3。M2是max pooling, 使用3×3卷积核，步长为2。Max pooling 层可以使得网络对于图像局部的细微扰动更鲁棒，比如小的 registration 误差。但是过多的 pooling 层会丢失细节，而对于人脸识别来说，局部细节还是重要的，因此本文只使用了一层 max pooling。作者把前三层视作 front-end adaptive pre-processing stage。<br>L4, L5, L6 都是 <strong>局部连接层</strong> ，即不做权值共享的卷积层。由于网络输入的是经过 alignment 的图像，因此局部的信息相对固定，不具有局部平稳性，因此使用卷积层并不合适。但是使用局部连接层的问题是参数太多了，必须使用超大的数据库进行训练。<br>最后是两层全连接层。其作用是捕捉feature之间的相互关系。第一个全连接层L7的输出被当作raw 人脸表征特征向量。F8的输出被fed到一个 K-way 的 softmax 以生成类别的分布。本文的 loss 使用的是交叉熵 loss。另一个重要的特征是，本文得到的特征是稀疏的，平均有75%的特征是0值（毕竟用的ReLU做激活函数）。</p>
 <h3 id="特征度量"><a href="#特征度量" class="headerlink" title="特征度量"></a>特征度量</h3><p>作者又考虑了 verification metric，即人脸验证的度量。这是为了在数据集的分布不同时，仍然有较好的泛化能力。本文使用的是unsupervised metric，直接计算两个经过归一化后的特征之间的内积。但是，本文也尝试了两种有监督的度量，X² similarity和Siamese network。加权X²是LBP一文中使用的距离度量，本文考虑到DeepFace提取的特征和LBP特征一样具有(1)非负性，(2)稀疏性，(3)值在[0,1]之间，因此也使用了X²距离。X²距离非常简单，如下式所示：</p>
 <p>就是把两个人脸的特征向量对应元素进行X²操作，再加上用SVM学出来的权重即可。第二种是Siamese network，当神经网络训练完成后，将其复制为两份（不包含L8全连接层，前文提到直接用L7的输出作为特征向量），用于输入两张人脸图像，得到特征后先计算两个feature的绝对差值，然后将其输入给一个全连接层（注意不是原来的L8，其只有一个神经元）来进行二分类，判断两张人脸是否身份相同。为防止过拟合，S网络只有最高两层全连接层是参数可调的。S网络的距离的数学表达如下：</p>
@@ -150,7 +150,7 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://wangsc.site/2018/10/14/DeepFace_notes/" data-id="cjnbwniii00001wvttoqa3dh3" class="article-share-link">Share</a>
+      <a data-url="http://wangsc.site/2018/DeepFace_notes.html" data-id="cjnepwezg00042kvtvarvj06o" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/人脸识别/">人脸识别</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/视觉求索/">视觉求索</a></li></ul>
@@ -162,7 +162,7 @@ ga('send', 'pageview');
 <nav id="article-nav">
   
   
-    <a href="/2018/09/09/kd-net_notes/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2018/kd-net_notes.html" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
       <div class="article-nav-title">kd-net论文阅读笔记</div>
     </a>
@@ -215,15 +215,15 @@ ga('send', 'pageview');
       <ul>
         
           <li>
-            <a href="/2018/10/14/DeepFace_notes/">DeepFace 论文阅读笔记</a>
+            <a href="/2018/DeepFace_notes.html">DeepFace 论文阅读笔记</a>
           </li>
         
           <li>
-            <a href="/2018/09/09/kd-net_notes/">kd-net论文阅读笔记</a>
+            <a href="/2018/kd-net_notes.html">kd-net论文阅读笔记</a>
           </li>
         
           <li>
-            <a href="/2018/07/09/hello-world/">Hello World</a>
+            <a href="/2018/hello-world.html">Hello World</a>
           </li>
         
       </ul>
