@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="baidu-site-verification" content="MfpDriWn4b" />
+  <meta name="google-site-verification" content="AnEB6qLQLiF-dg5cSLgKs4c-1leYgKzqtA4ZniS9840" />
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-49728497-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+  
+  <title>python学习笔记 | Wang SC</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="前言最近开始做实验，发现 python 的很多内容都已生疏，且总是用 C 语言 的思维和语法习惯来写，感觉很不优雅。阅读他人的代码时总是有一种“哦，原来如此”，“还可以这样”的慨叹，为这些“奇技淫巧”所惊讶，于是，在实验之余想整理一下自己的一些学习内容、一些踩过的坑，和一些感想收获。">
+<meta name="keywords" content="python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python学习笔记">
+<meta property="og:url" content="http://wangsc.site/2018/python学习笔记.html">
+<meta property="og:site_name" content="Wang SC">
+<meta property="og:description" content="前言最近开始做实验，发现 python 的很多内容都已生疏，且总是用 C 语言 的思维和语法习惯来写，感觉很不优雅。阅读他人的代码时总是有一种“哦，原来如此”，“还可以这样”的慨叹，为这些“奇技淫巧”所惊讶，于是，在实验之余想整理一下自己的一些学习内容、一些踩过的坑，和一些感想收获。">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-12-04T15:41:37.007Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="python学习笔记">
+<meta name="twitter:description" content="前言最近开始做实验，发现 python 的很多内容都已生疏，且总是用 C 语言 的思维和语法习惯来写，感觉很不优雅。阅读他人的代码时总是有一种“哦，原来如此”，“还可以这样”的慨叹，为这些“奇技淫巧”所惊讶，于是，在实验之余想整理一下自己的一些学习内容、一些踩过的坑，和一些感想收获。">
+  
+    <link rel="alternate" href="/atom.xml" title="Wang SC" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+  
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Wang SC</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">To seek a newer world.</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/about">About me</a>
+        
+          <a class="main-nav-link" href="https://github.com/wangsc1912">GitHub</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-github-link" class="nav-icon" href="https://github.com/wangsc1912" target="_blank" title="GitHub"></a>
+        
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://wangsc.site"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-python学习笔记" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/python学习笔记.html" class="article-date">
+  <time datetime="2018-12-04T15:28:00.000Z" itemprop="datePublished">2018-12-04</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      python学习笔记
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>最近开始做实验，发现 <code>python</code> 的很多内容都已生疏，且总是用 <code>C 语言</code> 的思维和语法习惯来写，感觉很不优雅。阅读他人的代码时总是有一种“哦，原来如此”，“还可以这样”的慨叹，为这些“奇技淫巧”所惊讶，于是，在实验之余想整理一下自己的一些学习内容、一些踩过的坑，和一些感想收获。</p>
+<a id="more"></a>
+<h3 id="文件的flush-方法"><a href="#文件的flush-方法" class="headerlink" title="文件的flush()方法"></a>文件的flush()方法</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fileObject.flush()</span><br></pre></td></tr></table></figure>
+<p>该函数用来刷新缓冲区，即将缓冲区中的数据立即写入文件，同时清空缓冲区。而正常情况下，只有在文件关闭 <code>close()</code> 时才会刷新缓冲区。</p>
+<h3 id="rstrip"><a href="#rstrip" class="headerlink" title="rstrip()"></a>rstrip()</h3><p>删除 string 字符串末尾的制定字符（默认为空格）</p>
+<p>语法：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">str.rstrip([chars])</span><br></pre></td></tr></table></figure>
+<p>参数 chars – 指定删除的字符（默认为空格）</p>
+<h3 id="使用-with-打开多个文件"><a href="#使用-with-打开多个文件" class="headerlink" title="使用 with 打开多个文件"></a>使用 with 打开多个文件</h3><p>参考资料：<a href="https://www.hustyx.com/python/119/" target="_blank" rel="noopener">https://www.hustyx.com/python/119/</a><br>使用with打开文件的好处不多说，这里记录一下如果要打开多个文件，该怎么书写简捷的代码。</p>
+<p>场景是同时打开三个文件，文件行数一样，程序实现每个文件依次读取一行，同时输出。 首先来一种比较容易想到的写法，如下一样嵌套：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> open(<span class="string">'file1'</span>) <span class="keyword">as</span> f1:</span><br><span class="line">    <span class="keyword">with</span> open(<span class="string">'file2'</span>) <span class="keyword">as</span> f2:</span><br><span class="line">        <span class="keyword">with</span> open(<span class="string">'file3'</span>) <span class="keyword">as</span> f3:</span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> f1:</span><br><span class="line">                j = f2.readline()</span><br><span class="line">                k = f3.readline()</span><br><span class="line">                print(i,j,k)</span><br></pre></td></tr></table></figure>
+<p>注意，这里只能对一个文件进行for循环读取，不能写成：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i,j,k <span class="keyword">in</span> f1,f2,f3:</span><br><span class="line">    print(i,j,k)</span><br></pre></td></tr></table></figure>
+<p>这么多层缩进太恶心了，还是来一种简洁些的写法：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> open(<span class="string">'file1'</span>) <span class="keyword">as</span> f1, open(<span class="string">'file2'</span>) <span class="keyword">as</span> f2, open(<span class="string">'file3'</span>) <span class="keyword">as</span> f3:</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> f1:</span><br><span class="line">        j = f2.readline()</span><br><span class="line">        k = f3.readline()</span><br><span class="line">        print(i,j,k)</span><br></pre></td></tr></table></figure>
+<p>还有一种优雅一点的写法：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> contextlib <span class="keyword">import</span> nested</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> nested(open(<span class="string">'file1'</span>), open(<span class="string">'file2'</span>), open(<span class="string">'file3'</span>)) <span class="keyword">as</span> (f1,f2,f3):</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> f1:</span><br><span class="line">        j = f2.readline()</span><br><span class="line">        k = f3.readline()</span><br><span class="line">        print(i,j,k)</span><br></pre></td></tr></table></figure>
+<p>但是实际操作中，contextlib 库中没有 nested 函数。可能是 python3 版本的问题。</p>
+<h3 id="给-numpy-数组添加一行或一列"><a href="#给-numpy-数组添加一行或一列" class="headerlink" title="给 numpy 数组添加一行或一列"></a>给 numpy 数组添加一行或一列</h3><p>方法1<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">a = np.array([[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>],[<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>],[<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>]])</span><br><span class="line">b = np.array([[<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>]])</span><br><span class="line">c = np.r_[a,b]</span><br><span class="line">d = np.c_[a,b.T]</span><br><span class="line"><span class="keyword">print</span> c</span><br><span class="line"><span class="keyword">print</span> d</span><br></pre></td></tr></table></figure></p>
+<p>[[1 2 3]<br>[4 5 6]<br>[7 8 9]<br>[0 0 0]]</p>
+<p>[[1 2 3 0]<br>[4 5 6 0]<br>[7 8 9 0]]</p>
+<p>该方法只能将两个矩阵合并</p>
+<p>注意要合并的两矩阵的行列关系</p>
+<p>方法2<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">a = np.array([[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>],[<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>],[<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>]])</span><br><span class="line">b = np.array([[<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>]])</span><br><span class="line">c = np.insert(a, <span class="number">0</span>, values=b, axis=<span class="number">0</span>)</span><br><span class="line">d = np.insert(a, <span class="number">0</span>, values=b, axis=<span class="number">1</span>)</span><br><span class="line"><span class="keyword">print</span> c</span><br><span class="line"><span class="keyword">print</span> d</span><br></pre></td></tr></table></figure></p>
+<p>[[0 0 0]<br>[1 2 3]<br>[4 5 6]<br>[7 8 9]]</p>
+<p>[[0 1 2 3]<br>[0 4 5 6]<br>[0 7 8 9]]</p>
+<p>这种是将一个集合插入到一个矩阵中，对于b可以是列表或元组，它仅仅提供要插入的值，但个数要对</p>
+<p>np.insert的第二个参数是插入的位置，axis用来控制是插入行还是列，可见该方法非常灵活！</p>
+<p>方法3<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">a = np.array([[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>],[<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>],[<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>]])</span><br><span class="line">b = np.array([[<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>]])</span><br><span class="line">c = np.row_stack((a,b))</span><br><span class="line">d = np.column_stack((a,b.T))</span><br></pre></td></tr></table></figure></p>
+<p>与方法一效果完全相同</p>
+<h3 id="map函数：从list的类型转换说起"><a href="#map函数：从list的类型转换说起" class="headerlink" title="map函数：从list的类型转换说起"></a>map函数：从list的类型转换说起</h3><p>进行人脸对齐操作时遇到了一个问题，即我得到的图像旋转中心是用两个坐标的均值计算出来的，因此是浮点数坐标，然而后续操作需要使用这个坐标作为图像像素的索引，必须为整数值，于是就想，如何才能让这个坐标元组直接变换为整数值？<br>这时就重新发现了 <code>map()</code> 函数，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">eye_center = (<span class="number">88.5</span>, <span class="number">89.5</span>)</span><br><span class="line">eye_c = map(int, eye_center)</span><br><span class="line">print(eye_c)</span><br></pre></td></tr></table></figure>
+<p>但是由于map返回的是个迭代器 <code>Iterator</code> ，而 <code>Iterator</code> 是惰性序列，因此，得到的eye_c如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;map object at <span class="number">0x7f1d9013aa58</span>&gt;</span><br></pre></td></tr></table></figure>
+<p>那么就需要用 <code>list()</code> 将其整个序列计算出来，返回list。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">eye_center = (<span class="number">88.5</span>, <span class="number">89.5</span>)</span><br><span class="line">eye_c = list(map(int, eye_center))</span><br><span class="line">print(eye_c)</span><br></pre></td></tr></table></figure>
+<p>输出为：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[<span class="number">88</span>, <span class="number">89</span>]</span><br></pre></td></tr></table></figure>
+<p>或使用 <code>tuple()</code> 返回 tuple。</p>
+<h3 id="判断列表为空"><a href="#判断列表为空" class="headerlink" title="判断列表为空"></a>判断列表为空</h3><p>Python中判断list是否为空有以下两种方式：</p>
+<p>方式一：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">list_temp = []</span><br><span class="line"><span class="keyword">if</span> len(list_temp):</span><br><span class="line">    <span class="comment"># 存在值即为真</span></span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="comment"># list_temp是空的</span></span><br></pre></td></tr></table></figure>
+<p>方式二：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">list_temp = []</span><br><span class="line"><span class="keyword">if</span> list_temp:</span><br><span class="line">    <span class="comment"># 存在值即为真</span></span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="comment"># list_temp是空的</span></span><br></pre></td></tr></table></figure>
+<p>以上两种方法均可以判断出 list_temp 列表是否是空列表，第二个方法要优于第一个方法，在Python中，False,0,’’,[],{},()都可以视为假。</p>
+<p>官方文档中有如下描述：</p>
+<blockquote>
+<p>In the context of Boolean operations, and also when expressions are used by control flow statements, the following values are interpreted as false: False, None, numeric zero of all types, and empty strings and containers (including strings, tuples, lists, dictionaries, sets and frozensets).  All other values are interpreted as true.  (See the <strong>nonzero</strong>() special method for a way to change this.)</p>
+</blockquote>
+<p>可见，空字符串自然为false，可直接用于 if 表达式中。</p>
+<h3 id="numpy-数组取行或取列"><a href="#numpy-数组取行或取列" class="headerlink" title="numpy 数组取行或取列"></a>numpy 数组取行或取列</h3><p>这个数组跟MATLAB简直不要太像。</p>
+<p>首先得导包，from numpy import *</p>
+<p>如果你要取前几行</p>
+<p>a=c[0:3,:]  前0,1,2行</p>
+<p>b = c[0,2:4]  第0行的第2和第3列不包括第4列，因为列下标也是从0开始的</p>
+<p>d = c[2:4,2:4] 取中间的2-4行的2-4列</p>
+<p>e = c[0,:]  取第0行所有数据</p>
+<p>f = c[:,1]  取第1列所有数据</p>
+<p>g = c[::2,::2] 两个冒号后面表示步长为2</p>
+<p>### </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://wangsc.site/2018/python学习笔记.html" data-id="cjp9wwtln0002bwvt8t71fgnb" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2018/DeepFace_notes.html" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">DeepFace 论文阅读笔记</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/人脸识别/">人脸识别</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/视觉求索/">视觉求索</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/人脸识别/" style="font-size: 10px;">人脸识别</a> <a href="/tags/视觉求索/" style="font-size: 20px;">视觉求索</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/python学习笔记.html">python学习笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2018/DeepFace_notes.html">DeepFace 论文阅读笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2018/kd-net_notes.html">kd-net论文阅读笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2018/hello-world.html">Hello World</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 Wang SC<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/about" class="mobile-nav-link">About me</a>
+  
+    <a href="https://github.com/wangsc1912" class="mobile-nav-link">GitHub</a>
+  
+</nav>
+    
+
+<script src="http://apps.bdimg.com/libs/jquery/2.0.3/jquery.min.js"></script>
+<script type="text/javascript">
+//<![CDATA[
+if (typeof jQuery == 'undefined') {
+  document.write(unescape("%3Cscript src='/js/jquery-2.0.3.min.js' type='text/javascript'%3E%3C/script%3E"));
+}
+// ]]>
+</script>
+
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
