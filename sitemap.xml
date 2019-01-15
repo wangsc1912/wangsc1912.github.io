@@ -2,9 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://wangsc.site/2018/adverserialMTL.html</loc>
+    
+    <lastmod>2019-01-15T15:35:13.236Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://wangsc.site/2018/python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.html</loc>
     
-    <lastmod>2018-12-04T15:41:37.007Z</lastmod>
+    <lastmod>2018-12-05T16:04:01.502Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://wangsc.site/about/index.html</loc>
+    
+    <lastmod>2018-12-04T15:55:51.471Z</lastmod>
     
   </url>
   
@@ -26,13 +40,6 @@
     <loc>http://wangsc.site/2018/hello-world.html</loc>
     
     <lastmod>2018-10-14T03:46:15.456Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://wangsc.site/about/index.html</loc>
-    
-    <lastmod>2018-07-07T13:48:20.161Z</lastmod>
     
   </url>
   
