@@ -1,8 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://wangsc.site/2019/learning_to_zoom.html</loc>
+    <lastmod>2019-08-18T16:13:10.213Z</lastmod>
+  </url>  <url>
+    <loc>http://wangsc.site/2019/adaptiveFace.html</loc>
+    <lastmod>2019-08-18T16:12:40.849Z</lastmod>
+  </url>  <url>
+    <loc>http://wangsc.site/2019/face_cluster.html</loc>
+    <lastmod>2019-08-18T16:12:28.117Z</lastmod>
+  </url>  <url>
     <loc>http://wangsc.site/2019/adverserialMTL.html</loc>
-    <lastmod>2019-01-17T15:56:58.986Z</lastmod>
+    <lastmod>2019-08-18T16:12:13.491Z</lastmod>
   </url>  <url>
     <loc>http://wangsc.site/2018/history_of_super_heroes.html</loc>
     <lastmod>2019-01-17T15:51:47.142Z</lastmod>

@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="baidu-site-verification" content="MfpDriWn4b" />
+  <meta name="google-site-verification" content="AnEB6qLQLiF-dg5cSLgKs4c-1leYgKzqtA4ZniS9840" />
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-49728497-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+  
+  <title>AdaptiveFace 阅读笔记 | Wang SC</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="这是CVPR 2019 一篇人脸识别的文章。三个创新点：  针对类别不均衡问题，改进 margin-based softmax loss，不再对每一类设置固定大小的margin，而是自适应的学习margin，使得训练样本少且类内方差小的类有更大的margin。  由于人脸数据集中的类别数非常大（包含的人数非常多），但对于每一个人而言，和他长得比较像的、容易分错的人就那么几个。为了高效的进行训练，提">
+<meta name="keywords" content="视觉求索">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AdaptiveFace 阅读笔记">
+<meta property="og:url" content="http://wangsc.site/2019/adaptiveFace.html">
+<meta property="og:site_name" content="Wang SC">
+<meta property="og:description" content="这是CVPR 2019 一篇人脸识别的文章。三个创新点：  针对类别不均衡问题，改进 margin-based softmax loss，不再对每一类设置固定大小的margin，而是自适应的学习margin，使得训练样本少且类内方差小的类有更大的margin。  由于人脸数据集中的类别数非常大（包含的人数非常多），但对于每一个人而言，和他长得比较像的、容易分错的人就那么几个。为了高效的进行训练，提">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-08-18T16:12:40.849Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="AdaptiveFace 阅读笔记">
+<meta name="twitter:description" content="这是CVPR 2019 一篇人脸识别的文章。三个创新点：  针对类别不均衡问题，改进 margin-based softmax loss，不再对每一类设置固定大小的margin，而是自适应的学习margin，使得训练样本少且类内方差小的类有更大的margin。  由于人脸数据集中的类别数非常大（包含的人数非常多），但对于每一个人而言，和他长得比较像的、容易分错的人就那么几个。为了高效的进行训练，提">
+  
+    <link rel="alternate" href="/atom.xml" title="Wang SC" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+  
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Wang SC</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">To seek a newer world.</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/about">About me</a>
+        
+          <a class="main-nav-link" href="https://github.com/wangsc1912">GitHub</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-github-link" class="nav-icon" href="https://github.com/wangsc1912" target="_blank" title="GitHub"></a>
+        
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://wangsc.site"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-adaptiveFace" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/adaptiveFace.html" class="article-date">
+  <time datetime="2019-06-28T14:08:00.000Z" itemprop="datePublished">2019-06-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      AdaptiveFace 阅读笔记
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>这是CVPR 2019 一篇人脸识别的文章。三个创新点：</p>
+<ol>
+<li><p>针对类别不均衡问题，改进 margin-based softmax loss，不再对每一类设置固定大小的margin，而是自适应的学习margin，使得训练样本少且类内方差小的类有更大的margin。</p>
+</li>
+<li><p>由于人脸数据集中的类别数非常大（包含的人数非常多），但对于每一个人而言，和他长得比较像的、容易分错的人就那么几个。为了高效的进行训练，提出了一种Hard Prototye Mining，使得训练时只关注相近的类别。</p>
+</li>
+<li><p>同样是出于训练效率的角度，提出了改进版的难例挖掘——Adaptive Data Sampling。其对每一个训练样本都分配一个权重，如果某样本被分类正确，则减小其权重，使其之后被选到的概率减小，而对于分错的样本则增加其权重。这样在训练后期，总被分对的样本就不会再参与训练，网络会专注于学习难分样本。</p>
+</li>
+</ol>
+<a id="more"></a>
+<p>这几个点看起来好像不是很大，但其实已经很不容易了，主要还是识别任务确实已经非常成熟了，CVPR今年识别相关工作比例之低也说明了这一点。</p>
+<p>关于创新点1：</p>
+<p>之前的margin-based softmax loss 确实可以减小类内方差，扩大类间方差，如图1，但是却没有考虑到样本不均衡问题。对于训练样本量较少、且训练样本的类内方差不是很大的类别，这种loss 对类内方差 squeeze 得不够小，如图2 (a) 所示。图2 中，红色是样本数量充足的类，蓝色是样本数较少的类。由图2(a) 可见，红色类的大量样本和蓝色类的少量样本都被压缩在大小相同的特征空间，然而实际上，由于蓝色类别样本量少，而且现有样本的类内方差小，因而其潜在的实际特征空间是更大的，实际的类内方差也更大，类间方差也相对减小了，如图中浅蓝色区域所示，这就有点违背了最初压缩类内方差、扩大类间方差的初衷。而作者提出的AdaM Softmax 如图2(b) 所示，蓝色类的少量样本被压缩的更紧了，这就可以使得蓝色类潜在的实际特征空间也是被有效压缩的。</p>
+<p>下面依据公式来看。首先对于样本 x_j 和其对应的标签 y^{j} ，原始的 Softmax Loss 为：</p>
+<p>M为batch size，p_{ij} 是样本 x_j 被分为 y^{j} 类的概率，W_i 就是神经网络最后一层全连接层对应于第i类的权重。W_{i}^{T}x_j 又可写成：</p>
+<p>各种各样的 margin based softmax loss 都是根据这个式子，在角度上加margin 的，如L Softmax，A-Softmax，CosFace 等。以 Cos Face 为例，loss如下：</p>
+<p>其中，s是W_{i}^{T}x_j中的幅度部分。该式中的margin m对每一类都是相同的，因而就会导致对样本少、且训练样本类内方差小的类别的压缩不够。本文提出的改进如下：</p>
+<p>对每一类都指定一个对应的margin，在网络中自动学习。另外，由于自己学出来的margin m有可能为0，作者有加了一项类别不变的margin：</p>
+<p>最终的Adaptive Margin Softmax Loss 为：</p>
+<p>根据实验结果来看，这个loss 确实达到了预期效果，margin随着类别训练样本数的减少而增大：</p>
+<p>再来看创新点2：</p>
+<p>人脸识别数据集的类别数量往往成千上万，也就是说其往往包含非常多的人（identity），但是对每个人（类别）而言，和他长得比较像的（类间方差较小的）人是很少的，那么在训练时其实不必和所有类进行比较来计算 Softmax loss（指数运算的计算量还是有点大的）。另一方面，对于每一个类，其对应的全连接层权重 W_i描述了该类所在的角度（可参考图2理解，每一类的样本都在该类权重W_i的一定范围内）。于是，作者针对每一类i，用 ANN (angle nearlest neighbor) graph 找到与该类最接近的k个类别，维护一个与类别i相对应的队列(queue) Q_i。那么在每一次迭代中，先找出batch 中所有样本对应的类C_a，再根据各自的队列Q_i找出所有与batch 中的类最相关的类C_b，最终用C_b的W作为这次迭代的权重矩阵进行计算。当然，这个队列也是动态维护的。</p>
+<p>创新点3就不多说了，就是开头说的那样。</p>
+<p>参考文献：</p>
+<p>H. Liu, X. Zhu, Z. Lei, S. Li, “AdaptiveFace: Adaptive Margin and Sampling for Face Recognition,” in Proc. IEEE Conf. Computer Vision and Pattern Recognition, 2019, pp. 11947-11956.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://wangsc.site/2019/adaptiveFace.html" data-id="cjzh66ly70000fcvt3vpm0nhy" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/视觉求索/">视觉求索</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/face_cluster.html" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Learning to Cluster Faces on an Affinity Graph阅读笔记
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/learning_to_zoom.html" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Learning to Zoom 阅读笔记</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/人脸识别/">人脸识别</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多任务学习/">多任务学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/电影漫谈/">电影漫谈</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/视觉求索/">视觉求索</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/face_cluster.html">Learning to Cluster Faces on an Affinity Graph阅读笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2019/adaptiveFace.html">AdaptiveFace 阅读笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2019/learning_to_zoom.html">Learning to Zoom 阅读笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2019/adverserialMTL.html">Adverarial Mutli-task Learning for Text Classification 阅读笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2018/history_of_super_heroes.html">History of Super Heroes 超级英雄漫谈</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  
+    
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 Wang SC<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/about" class="mobile-nav-link">About me</a>
+  
+    <a href="https://github.com/wangsc1912" class="mobile-nav-link">GitHub</a>
+  
+</nav>
+    
+
+<script src="http://apps.bdimg.com/libs/jquery/2.0.3/jquery.min.js"></script>
+<script type="text/javascript">
+//<![CDATA[
+if (typeof jQuery == 'undefined') {
+  document.write(unescape("%3Cscript src='/js/jquery-2.0.3.min.js' type='text/javascript'%3E%3C/script%3E"));
+}
+// ]]>
+</script>
+
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

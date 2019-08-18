@@ -20,19 +20,20 @@ ga('send', 'pageview');
 
 
   
-  <title>Tag: 视觉求索 | Wang SC</title>
+  <title>Learning to Cluster Faces on an Affinity Graph阅读笔记 | Wang SC</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="on the run">
-<meta name="keywords" content="Computer Vision">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Wang SC">
-<meta property="og:url" content="http://wangsc.site/tags/视觉求索/index.html">
+  <meta name="description" content="这篇文章是19年CVPR的一篇Oral，出自CUHK林达华组。今年CVPR上和graph 相关的文章非常多，仅oral就有10篇，个人感觉这个方向的文章思路都很有意思，让人耳目一新。比如 ”Multi-Label Image Recognition with Graph Convolutional Networks” 就是把所有的label构建成图，来对不同label共同出现的可能性进行建模，和图">
+<meta name="keywords" content="视觉求索">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Learning to Cluster Faces on an Affinity Graph阅读笔记">
+<meta property="og:url" content="http://wangsc.site/2019/face_cluster.html">
 <meta property="og:site_name" content="Wang SC">
-<meta property="og:description" content="on the run">
+<meta property="og:description" content="这篇文章是19年CVPR的一篇Oral，出自CUHK林达华组。今年CVPR上和graph 相关的文章非常多，仅oral就有10篇，个人感觉这个方向的文章思路都很有意思，让人耳目一新。比如 ”Multi-Label Image Recognition with Graph Convolutional Networks” 就是把所有的label构建成图，来对不同label共同出现的可能性进行建模，和图">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-08-18T16:12:28.117Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Wang SC">
-<meta name="twitter:description" content="on the run">
+<meta name="twitter:title" content="Learning to Cluster Faces on an Affinity Graph阅读笔记">
+<meta name="twitter:description" content="这篇文章是19年CVPR的一篇Oral，出自CUHK林达华组。今年CVPR上和graph 相关的文章非常多，仅oral就有10篇，个人感觉这个方向的文章思路都很有意思，让人耳目一新。比如 ”Multi-Label Image Recognition with Graph Convolutional Networks” 就是把所有的label构建成图，来对不同label共同出现的可能性进行建模，和图">
   
     <link rel="alternate" href="/atom.xml" title="Wang SC" type="application/atom+xml">
   
@@ -94,145 +95,79 @@ ga('send', 'pageview');
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2019/face_cluster.html" class="archive-article-date">
-  <time datetime="2019-07-14T15:16:00.000Z" itemprop="datePublished">Jul 14</time>
+        <section id="main"><article id="post-face_cluster" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/face_cluster.html" class="article-date">
+  <time datetime="2019-07-14T15:16:00.000Z" itemprop="datePublished">2019-07-14</time>
 </a>
-      
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/face_cluster.html">Learning to Cluster Faces on an Affinity Graph阅读笔记</a>
+    <h1 class="article-title" itemprop="name">
+      Learning to Cluster Faces on an Affinity Graph阅读笔记
     </h1>
   
 
-    </header>
-  </div>
-</article>
-  
+      </header>
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2019/adaptiveFace.html" class="archive-article-date">
-  <time datetime="2019-06-28T14:08:00.000Z" itemprop="datePublished">Jun 28</time>
-</a>
+    <div class="article-entry" itemprop="articleBody">
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/adaptiveFace.html">AdaptiveFace 阅读笔记</a>
-    </h1>
-  
+        <p>这篇文章是19年CVPR的一篇Oral，出自CUHK林达华组。今年CVPR上和graph 相关的文章非常多，仅oral就有10篇，个人感觉这个方向的文章思路都很有意思，让人耳目一新。比如 ”Multi-Label Image Recognition with Graph Convolutional Networks” 就是把所有的label构建成图，来对不同label共同出现的可能性进行建模，和图像特征一起进行多标签的预测。虽然知乎上对这篇文章有一些异议，但文章思路还是不错的。CUHK这篇文章的思路也非常巧妙，把mask R-CNN 中 “提proposal -&gt; 检测 -&gt; 分割” 的思路搬到基于图的聚类上来，感觉很有创新性，不禁要感叹一句，这才是好的科研。<br><a id="more"></a></p>
+<p>传统的聚类思想各有各的局限性，如k-means 假设了每个聚类的样本都在一个中心附近（实际并非如此，想一下manifold），谱聚类为了防止最小割出现的bug，会约束不同cluster的样本数基本均衡。本文的方法则更general。</p>
+<p>框架如下：</p>
+<ol>
+<li><p>先以数据集的每一个样本用预训练的CNN提取特征，作为graph的vertex，以不同样本间的consine距离作为edge构建图</p>
+</li>
+<li><p>提取Super-vertex（类似于图像的super pixel），其实就是先根据edge的大小先做一个初步的聚类。具体的算法如下：</p>
+</li>
+</ol>
+<ol start="3">
+<li>虽然同一个super-vertex中的样本基本上都是同一类的，但是每一类却有可能包含多个super-vertex，因此需要对super-vertex做进一步的聚类。那么接下来，就是以super-vertex为基础构建新的graph，每个super-vertex的中心点作为新graph的一个vertex，中心点间的edges作为新图的edges。算法如下图所示：</li>
+</ol>
+<p>对新的图再次提取super-vertex作为proposal。当然也可以继续构建一个更高层的图，从而获得不同分辨率的proposal。</p>
+<ol start="4">
+<li>接下来要判断proposal正确的可能性。利用图卷积网络GCN-D对每个proposal提取特征，然后再加上两个全连接层，输出两个值：与ground truth 的IoU和IoP：</li>
+</ol>
+<p>其中P是proposal，Phat是ground truth。注意图卷积操作如下：</p>
+<p>F_l为 N×C，则 W_l为C×C’，因此，其可以直接对任意大小的图进行操作。</p>
+<ol start="5">
+<li><p>即使是IoU较高的proposal，其中也会存在不属于该cluster的样本。那么接下来就是进行Cluster Segmentation来剔除之前proposal中不属于该cluster 的 outlier。这里又用了一个图卷积网络GCN-S对每个节点输出预测值。当然这一步骤中作者也运用了一个比较巧妙的trick，此处不再赘述。</p>
+</li>
+<li><p>不同cluster之间不应该有重叠，因此，作者再对分割后的每个proposal做de-overlapping。</p>
+</li>
+</ol>
+<p>最后看一下效果吧：</p>
+<p>提升确实挺大，但可能也跟其有监督信息也有关系？</p>
 
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2019/learning_to_zoom.html" class="archive-article-date">
-  <time datetime="2019-02-18T15:28:00.000Z" itemprop="datePublished">Feb 18</time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/learning_to_zoom.html">Learning to Zoom 阅读笔记</a>
-    </h1>
-  
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://wangsc.site/2019/face_cluster.html" data-id="cjzh66lyg0003fcvtf93lk2q7" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/视觉求索/">视觉求索</a></li></ul>
 
-    </header>
+    </footer>
   </div>
-</article>
   
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2019/adverserialMTL.html" class="archive-article-date">
-  <time datetime="2019-01-15T15:38:00.000Z" itemprop="datePublished">Jan 15</time>
-</a>
-      
+<nav id="article-nav">
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/adverserialMTL.html">Adverarial Mutli-task Learning for Text Classification 阅读笔记</a>
-    </h1>
   
+    <a href="/2019/adaptiveFace.html" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">AdaptiveFace 阅读笔记</div>
+    </a>
+  
+</nav>
 
-    </header>
-  </div>
+  
 </article>
-  
-    
-    
-      
-        </div></section>
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/DeepFace_notes.html" class="archive-article-date">
-  <time datetime="2018-10-14T09:45:31.000Z" itemprop="datePublished">Oct 14</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/DeepFace_notes.html">DeepFace 论文阅读笔记</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/kd-net_notes.html" class="archive-article-date">
-  <time datetime="2018-09-09T15:31:31.000Z" itemprop="datePublished">Sep 9</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/kd-net_notes.html">kd-net论文阅读笔记</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
 
 </section>
         

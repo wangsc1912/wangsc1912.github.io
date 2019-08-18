@@ -96,10 +96,147 @@ ga('send', 'pageview');
       <div class="outer">
         <section id="main">
   
+    <article id="post-face_cluster" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/face_cluster.html" class="article-date">
+  <time datetime="2019-07-14T15:16:00.000Z" itemprop="datePublished">2019-07-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/face_cluster.html">Learning to Cluster Faces on an Affinity Graph阅读笔记</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>这篇文章是19年CVPR的一篇Oral，出自CUHK林达华组。今年CVPR上和graph 相关的文章非常多，仅oral就有10篇，个人感觉这个方向的文章思路都很有意思，让人耳目一新。比如 ”Multi-Label Image Recognition with Graph Convolutional Networks” 就是把所有的label构建成图，来对不同label共同出现的可能性进行建模，和图像特征一起进行多标签的预测。虽然知乎上对这篇文章有一些异议，但文章思路还是不错的。CUHK这篇文章的思路也非常巧妙，把mask R-CNN 中 “提proposal -&gt; 检测 -&gt; 分割” 的思路搬到基于图的聚类上来，感觉很有创新性，不禁要感叹一句，这才是好的科研。<br>
+        
+          <p class="article-more-link">
+            <a href="/2019/face_cluster.html#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://wangsc.site/2019/face_cluster.html" data-id="cjzh66lyg0003fcvtf93lk2q7" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/视觉求索/">视觉求索</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-adaptiveFace" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/adaptiveFace.html" class="article-date">
+  <time datetime="2019-06-28T14:08:00.000Z" itemprop="datePublished">2019-06-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/adaptiveFace.html">AdaptiveFace 阅读笔记</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>这是CVPR 2019 一篇人脸识别的文章。三个创新点：</p>
+<ol>
+<li><p>针对类别不均衡问题，改进 margin-based softmax loss，不再对每一类设置固定大小的margin，而是自适应的学习margin，使得训练样本少且类内方差小的类有更大的margin。</p>
+</li>
+<li><p>由于人脸数据集中的类别数非常大（包含的人数非常多），但对于每一个人而言，和他长得比较像的、容易分错的人就那么几个。为了高效的进行训练，提出了一种Hard Prototye Mining，使得训练时只关注相近的类别。</p>
+</li>
+<li><p>同样是出于训练效率的角度，提出了改进版的难例挖掘——Adaptive Data Sampling。其对每一个训练样本都分配一个权重，如果某样本被分类正确，则减小其权重，使其之后被选到的概率减小，而对于分错的样本则增加其权重。这样在训练后期，总被分对的样本就不会再参与训练，网络会专注于学习难分样本。</p>
+</li>
+</ol>
+        
+          <p class="article-more-link">
+            <a href="/2019/adaptiveFace.html#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://wangsc.site/2019/adaptiveFace.html" data-id="cjzh66ly70000fcvt3vpm0nhy" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/视觉求索/">视觉求索</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-learning_to_zoom" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/learning_to_zoom.html" class="article-date">
+  <time datetime="2019-02-18T15:28:00.000Z" itemprop="datePublished">2019-02-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/learning_to_zoom.html">Learning to Zoom 阅读笔记</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>这篇文章讲的是CNN的预处理——采样。一方面，由于CNN输入通常是固定大小的图像，因而对于高分辨率的图像，就要先对其进行采样，再输入CNN网络中。另一方面，对于某些数据集而言，降低输入的特征维度可以提高训练样本在输入空间上的覆盖（improving training sample coverage over the input space，这个理解很好），进而提高任务性能。传统的采样往往是均匀的。本文选择的是不均匀采样，图像的哪一部分对任务性能大，则对该部分采样率高，哪一部分对任务的作用不大，则对其使用低的采样率。由此采样后的图像相较于原图像是扭曲变形的，如下图所示。<br>
+        
+          <p class="article-more-link">
+            <a href="/2019/learning_to_zoom.html#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://wangsc.site/2019/learning_to_zoom.html" data-id="cjzh66lzx000lfcvtg0ul3mwv" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/视觉求索/">视觉求索</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-adverserialMTL" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/adverserialMTL.html" class="article-date">
-  <time datetime="2019-01-15T15:28:00.000Z" itemprop="datePublished">2019-01-15</time>
+  <time datetime="2019-01-15T15:38:00.000Z" itemprop="datePublished">2019-01-15</time>
 </a>
     
   </div>
@@ -127,7 +264,7 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://wangsc.site/2019/adverserialMTL.html" data-id="cjr0stcp00003jsvtsee22jjo" class="article-share-link">Share</a>
+      <a data-url="http://wangsc.site/2019/adverserialMTL.html" data-id="cjzh66lym0005fcvtjmyi5fsc" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/多任务学习/">多任务学习</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/视觉求索/">视觉求索</a></li></ul>
@@ -174,7 +311,7 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://wangsc.site/2018/history_of_super_heroes.html" data-id="cjr0stcp80006jsvttze74mwm" class="article-share-link">Share</a>
+      <a data-url="http://wangsc.site/2018/history_of_super_heroes.html" data-id="cjzh66lyr000afcvt4f6log87" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/电影漫谈/">电影漫谈</a></li></ul>
@@ -217,7 +354,7 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://wangsc.site/2018/python学习笔记.html" data-id="cjr0stcpa0007jsvtgei6xo8m" class="article-share-link">Share</a>
+      <a data-url="http://wangsc.site/2018/python学习笔记.html" data-id="cjzh66m01000nfcvth3vsn76o" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li></ul>
@@ -267,7 +404,7 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://wangsc.site/2018/DeepFace_notes.html" data-id="cjr0stcoy0002jsvtyz0t49ny" class="article-share-link">Share</a>
+      <a data-url="http://wangsc.site/2018/DeepFace_notes.html" data-id="cjzh66lyc0001fcvt075brl2j" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/人脸识别/">人脸识别</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/视觉求索/">视觉求索</a></li></ul>
@@ -310,7 +447,7 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://wangsc.site/2018/kd-net_notes.html" data-id="cjr0stcp40005jsvta8gnu05p" class="article-share-link">Share</a>
+      <a data-url="http://wangsc.site/2018/kd-net_notes.html" data-id="cjzh66lyh0004fcvtqfw8qcrq" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/视觉求索/">视觉求索</a></li></ul>
@@ -355,7 +492,7 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://wangsc.site/2018/hello-world.html" data-id="cjr0stcor0000jsvt7wcpap8q" class="article-share-link">Share</a>
+      <a data-url="http://wangsc.site/2018/hello-world.html" data-id="cjzh66lyq0008fcvt7mvfhl5h" class="article-share-link">Share</a>
       
       
     </footer>
@@ -388,7 +525,7 @@ ga('send', 'pageview');
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a></li></ul>
     </div>
   </div>
 
@@ -401,23 +538,23 @@ ga('send', 'pageview');
       <ul>
         
           <li>
+            <a href="/2019/face_cluster.html">Learning to Cluster Faces on an Affinity Graph阅读笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2019/adaptiveFace.html">AdaptiveFace 阅读笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2019/learning_to_zoom.html">Learning to Zoom 阅读笔记</a>
+          </li>
+        
+          <li>
             <a href="/2019/adverserialMTL.html">Adverarial Mutli-task Learning for Text Classification 阅读笔记</a>
           </li>
         
           <li>
             <a href="/2018/history_of_super_heroes.html">History of Super Heroes 超级英雄漫谈</a>
-          </li>
-        
-          <li>
-            <a href="/2018/python学习笔记.html">python学习笔记</a>
-          </li>
-        
-          <li>
-            <a href="/2018/DeepFace_notes.html">DeepFace 论文阅读笔记</a>
-          </li>
-        
-          <li>
-            <a href="/2018/kd-net_notes.html">kd-net论文阅读笔记</a>
           </li>
         
       </ul>

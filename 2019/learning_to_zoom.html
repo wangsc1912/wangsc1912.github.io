@@ -20,19 +20,20 @@ ga('send', 'pageview');
 
 
   
-  <title>Tag: 视觉求索 | Wang SC</title>
+  <title>Learning to Zoom 阅读笔记 | Wang SC</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="on the run">
-<meta name="keywords" content="Computer Vision">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Wang SC">
-<meta property="og:url" content="http://wangsc.site/tags/视觉求索/index.html">
+  <meta name="description" content="这篇文章讲的是CNN的预处理——采样。一方面，由于CNN输入通常是固定大小的图像，因而对于高分辨率的图像，就要先对其进行采样，再输入CNN网络中。另一方面，对于某些数据集而言，降低输入的特征维度可以提高训练样本在输入空间上的覆盖（improving training sample coverage over the input space，这个理解很好），进而提高任务性能。传统的采样往往是均匀的。">
+<meta name="keywords" content="视觉求索">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Learning to Zoom 阅读笔记">
+<meta property="og:url" content="http://wangsc.site/2019/learning_to_zoom.html">
 <meta property="og:site_name" content="Wang SC">
-<meta property="og:description" content="on the run">
+<meta property="og:description" content="这篇文章讲的是CNN的预处理——采样。一方面，由于CNN输入通常是固定大小的图像，因而对于高分辨率的图像，就要先对其进行采样，再输入CNN网络中。另一方面，对于某些数据集而言，降低输入的特征维度可以提高训练样本在输入空间上的覆盖（improving training sample coverage over the input space，这个理解很好），进而提高任务性能。传统的采样往往是均匀的。">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-08-18T16:13:10.213Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Wang SC">
-<meta name="twitter:description" content="on the run">
+<meta name="twitter:title" content="Learning to Zoom 阅读笔记">
+<meta name="twitter:description" content="这篇文章讲的是CNN的预处理——采样。一方面，由于CNN输入通常是固定大小的图像，因而对于高分辨率的图像，就要先对其进行采样，再输入CNN网络中。另一方面，对于某些数据集而言，降低输入的特征维度可以提高训练样本在输入空间上的覆盖（improving training sample coverage over the input space，这个理解很好），进而提高任务性能。传统的采样往往是均匀的。">
   
     <link rel="alternate" href="/atom.xml" title="Wang SC" type="application/atom+xml">
   
@@ -94,145 +95,74 @@ ga('send', 'pageview');
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2019/face_cluster.html" class="archive-article-date">
-  <time datetime="2019-07-14T15:16:00.000Z" itemprop="datePublished">Jul 14</time>
+        <section id="main"><article id="post-learning_to_zoom" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/learning_to_zoom.html" class="article-date">
+  <time datetime="2019-02-18T15:28:00.000Z" itemprop="datePublished">2019-02-18</time>
 </a>
-      
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/face_cluster.html">Learning to Cluster Faces on an Affinity Graph阅读笔记</a>
+    <h1 class="article-title" itemprop="name">
+      Learning to Zoom 阅读笔记
     </h1>
   
 
-    </header>
-  </div>
-</article>
-  
+      </header>
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2019/adaptiveFace.html" class="archive-article-date">
-  <time datetime="2019-06-28T14:08:00.000Z" itemprop="datePublished">Jun 28</time>
-</a>
+    <div class="article-entry" itemprop="articleBody">
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/adaptiveFace.html">AdaptiveFace 阅读笔记</a>
-    </h1>
-  
+        <p>这篇文章讲的是CNN的预处理——采样。一方面，由于CNN输入通常是固定大小的图像，因而对于高分辨率的图像，就要先对其进行采样，再输入CNN网络中。另一方面，对于某些数据集而言，降低输入的特征维度可以提高训练样本在输入空间上的覆盖（improving training sample coverage over the input space，这个理解很好），进而提高任务性能。传统的采样往往是均匀的。本文选择的是不均匀采样，图像的哪一部分对任务性能大，则对该部分采样率高，哪一部分对任务的作用不大，则对其使用低的采样率。由此采样后的图像相较于原图像是扭曲变形的，如下图所示。<br><a id="more"></a></p>
+<p>具体方法上，本文先将高分辨率的输入图像I均匀采样，得到低分辨率图像Il，然后用这个Il输入一个进行显著性预测的CNN得到 saliency map S。然后，再依据saliency map S 得到最终的显著性的采样图像 J。采样后图像J 与原图 I 的关系为：</p>
+<center>J(x, y) = I(u(x, y), v(x, y))</center>
 
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2019/learning_to_zoom.html" class="archive-article-date">
-  <time datetime="2019-02-18T15:28:00.000Z" itemprop="datePublished">Feb 18</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/learning_to_zoom.html">Learning to Zoom 阅读笔记</a>
-    </h1>
-  
+<p>即，采样后图像上的 (x, y) 点对应于原图的 (u, v)。(x, y) 和 (u, v) 的对应关系如下：</p>
+<p>其实就是根据采样后的点左边 (x, y) 和显著性图 (saliency map) 对x’ 做了一个加权，S(x’, y’)k((x, y), (x’,y’))是其权重。得到该点对应的原图坐标 (u, v)。注意此处的所有坐标(x, y)， (x’, y’) 和 (u, v) 都是被归一化了的，因此都只是相对坐标。可以看到，saliency map上权值较大的像素，其对周围像素的影响就越大。也就是说 saliency map 上权值较大的点a会让周围点b依据点a进行采样，而非均匀采样时b点对应的原图区域。见下图。</p>
+<p>局限性：</p>
+<p>(1)该方法归根结底是一种采样方法，其还是针对输入分辨率较高的图像。如果输入图像分辨率本来就不高，那这种方法虽然仍然可以使用，但其必要性就没有了。作者在github上也提到，由于ImageNet中图像像素不高，因此该方法在ImageNet 上只有很少提高(marginally)，而在有高分辨率的数据库上性能提升很大。</p>
+<p>(2)不适用于输入大小不一致的情况。</p>
+<p>(3)该方法适用于允许图像有形变的情况。如本文实验的 Gaze Tracking，其主要关注眼睛看哪里，看多久，而不关心眼睛的形状、人脸的形状等。而对于细分类问题，本文提到，“用以判别两个类别的信息通常隐藏在图像的很小一部分，在低分辨率下可能是无法解决的。事实上，在MSRA的 RA-CNN 一文中也提到，对于细粒度分类问题，其实形态，轮廓特征都不是那么重要，而细节纹理特征则起了主导作用，因此，这一任务也允许图像形变，对细节纹理进行密集采样。</p>
+<p>Reference:</p>
+<p>[1] A. Recasens, P. Kellnhofer, S. Stent, W. Matusik, and A. Torralba, “Learning to Zoom: a Saliency-Based Sampling Layer for Neural Networks,” in Proc. European Conference on Computer Vision, 2018, pp. 51-66.</p>
 
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2019/adverserialMTL.html" class="archive-article-date">
-  <time datetime="2019-01-15T15:38:00.000Z" itemprop="datePublished">Jan 15</time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/adverserialMTL.html">Adverarial Mutli-task Learning for Text Classification 阅读笔记</a>
-    </h1>
-  
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://wangsc.site/2019/learning_to_zoom.html" data-id="cjzh66lzx000lfcvtg0ul3mwv" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/视觉求索/">视觉求索</a></li></ul>
 
-    </header>
+    </footer>
   </div>
-</article>
   
     
-    
-      
-        </div></section>
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/DeepFace_notes.html" class="archive-article-date">
-  <time datetime="2018-10-14T09:45:31.000Z" itemprop="datePublished">Oct 14</time>
-</a>
-      
+<nav id="article-nav">
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/DeepFace_notes.html">DeepFace 论文阅读笔记</a>
-    </h1>
+    <a href="/2019/adaptiveFace.html" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          AdaptiveFace 阅读笔记
+        
+      </div>
+    </a>
   
+  
+    <a href="/2019/adverserialMTL.html" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Adverarial Mutli-task Learning for Text Classification 阅读笔记</div>
+    </a>
+  
+</nav>
 
-    </header>
-  </div>
+  
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/kd-net_notes.html" class="archive-article-date">
-  <time datetime="2018-09-09T15:31:31.000Z" itemprop="datePublished">Sep 9</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/kd-net_notes.html">kd-net论文阅读笔记</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
 
 </section>
         
