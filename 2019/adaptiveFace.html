@@ -30,10 +30,19 @@ ga('send', 'pageview');
 <meta property="og:site_name" content="Wang SC">
 <meta property="og:description" content="这是CVPR 2019 一篇人脸识别的文章。三个创新点：  针对类别不均衡问题，改进 margin-based softmax loss，不再对每一类设置固定大小的margin，而是自适应的学习margin，使得训练样本少且类内方差小的类有更大的margin。  由于人脸数据集中的类别数非常大（包含的人数非常多），但对于每一个人而言，和他长得比较像的、容易分错的人就那么几个。为了高效的进行训练，提">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-08-18T16:12:40.849Z">
+<meta property="og:image" content="http://wangsc.site/2019/adaptiveFace/pic1.png">
+<meta property="og:image" content="http://wangsc.site/2019/adaptiveFace/fomula1.png">
+<meta property="og:image" content="http://wangsc.site/2019/adaptiveFace/fomula2.png">
+<meta property="og:image" content="http://wangsc.site/2019/adaptiveFace/fomula3.png">
+<meta property="og:image" content="http://wangsc.site/2019/adaptiveFace/fomula4.png">
+<meta property="og:image" content="http://wangsc.site/2019/adaptiveFace/fomula5.png">
+<meta property="og:image" content="http://wangsc.site/2019/adaptiveFace/fomula6.png">
+<meta property="og:image" content="http://wangsc.site/2019/adaptiveFace/result1.png">
+<meta property="og:updated_time" content="2019-08-19T13:52:10.778Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="AdaptiveFace 阅读笔记">
 <meta name="twitter:description" content="这是CVPR 2019 一篇人脸识别的文章。三个创新点：  针对类别不均衡问题，改进 margin-based softmax loss，不再对每一类设置固定大小的margin，而是自适应的学习margin，使得训练样本少且类内方差小的类有更大的margin。  由于人脸数据集中的类别数非常大（包含的人数非常多），但对于每一个人而言，和他长得比较像的、容易分错的人就那么几个。为了高效的进行训练，提">
+<meta name="twitter:image" content="http://wangsc.site/2019/adaptiveFace/pic1.png">
   
     <link rel="alternate" href="/atom.xml" title="Wang SC" type="application/atom+xml">
   
@@ -130,13 +139,21 @@ ga('send', 'pageview');
 <p>这几个点看起来好像不是很大，但其实已经很不容易了，主要还是识别任务确实已经非常成熟了，CVPR今年识别相关工作比例之低也说明了这一点。</p>
 <p>关于创新点1：</p>
 <p>之前的margin-based softmax loss 确实可以减小类内方差，扩大类间方差，如图1，但是却没有考虑到样本不均衡问题。对于训练样本量较少、且训练样本的类内方差不是很大的类别，这种loss 对类内方差 squeeze 得不够小，如图2 (a) 所示。图2 中，红色是样本数量充足的类，蓝色是样本数较少的类。由图2(a) 可见，红色类的大量样本和蓝色类的少量样本都被压缩在大小相同的特征空间，然而实际上，由于蓝色类别样本量少，而且现有样本的类内方差小，因而其潜在的实际特征空间是更大的，实际的类内方差也更大，类间方差也相对减小了，如图中浅蓝色区域所示，这就有点违背了最初压缩类内方差、扩大类间方差的初衷。而作者提出的AdaM Softmax 如图2(b) 所示，蓝色类的少量样本被压缩的更紧了，这就可以使得蓝色类潜在的实际特征空间也是被有效压缩的。</p>
+<img src="/2019/adaptiveFace/pic1.png">
 <p>下面依据公式来看。首先对于样本 x_j 和其对应的标签 y^{j} ，原始的 Softmax Loss 为：</p>
+<img src="/2019/adaptiveFace/fomula1.png">
 <p>M为batch size，p_{ij} 是样本 x_j 被分为 y^{j} 类的概率，W_i 就是神经网络最后一层全连接层对应于第i类的权重。W_{i}^{T}x_j 又可写成：</p>
+<img src="/2019/adaptiveFace/fomula2.png">
 <p>各种各样的 margin based softmax loss 都是根据这个式子，在角度上加margin 的，如L Softmax，A-Softmax，CosFace 等。以 Cos Face 为例，loss如下：</p>
+<img src="/2019/adaptiveFace/fomula3.png">
 <p>其中，s是W_{i}^{T}x_j中的幅度部分。该式中的margin m对每一类都是相同的，因而就会导致对样本少、且训练样本类内方差小的类别的压缩不够。本文提出的改进如下：</p>
+<img src="/2019/adaptiveFace/fomula4.png">
 <p>对每一类都指定一个对应的margin，在网络中自动学习。另外，由于自己学出来的margin m有可能为0，作者有加了一项类别不变的margin：</p>
+<img src="/2019/adaptiveFace/fomula5.png">
 <p>最终的Adaptive Margin Softmax Loss 为：</p>
+<img src="/2019/adaptiveFace/fomula6.png">
 <p>根据实验结果来看，这个loss 确实达到了预期效果，margin随着类别训练样本数的减少而增大：</p>
+<img src="/2019/adaptiveFace/result1.png">
 <p>再来看创新点2：</p>
 <p>人脸识别数据集的类别数量往往成千上万，也就是说其往往包含非常多的人（identity），但是对每个人（类别）而言，和他长得比较像的（类间方差较小的）人是很少的，那么在训练时其实不必和所有类进行比较来计算 Softmax loss（指数运算的计算量还是有点大的）。另一方面，对于每一个类，其对应的全连接层权重 W_i描述了该类所在的角度（可参考图2理解，每一类的样本都在该类权重W_i的一定范围内）。于是，作者针对每一类i，用 ANN (angle nearlest neighbor) graph 找到与该类最接近的k个类别，维护一个与类别i相对应的队列(queue) Q_i。那么在每一次迭代中，先找出batch 中所有样本对应的类C_a，再根据各自的队列Q_i找出所有与batch 中的类最相关的类C_b，最终用C_b的W作为这次迭代的权重矩阵进行计算。当然，这个队列也是动态维护的。</p>
 <p>创新点3就不多说了，就是开头说的那样。</p>
@@ -161,7 +178,7 @@ ga('send', 'pageview');
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          Learning to Cluster Faces on an Affinity Graph阅读笔记
+          Learning to Cluster Faces on an Affinity Graph 阅读笔记
         
       </div>
     </a>
@@ -211,7 +228,7 @@ ga('send', 'pageview');
       <ul>
         
           <li>
-            <a href="/2019/face_cluster.html">Learning to Cluster Faces on an Affinity Graph阅读笔记</a>
+            <a href="/2019/face_cluster.html">Learning to Cluster Faces on an Affinity Graph 阅读笔记</a>
           </li>
         
           <li>

@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>http://wangsc.site/2019/learning_to_zoom.html</loc>
-    <lastmod>2019-08-18T16:13:10.213Z</lastmod>
-  </url>  <url>
     <loc>http://wangsc.site/2019/adaptiveFace.html</loc>
-    <lastmod>2019-08-18T16:12:40.849Z</lastmod>
+    <lastmod>2019-08-19T13:52:10.778Z</lastmod>
+  </url>  <url>
+    <loc>http://wangsc.site/2019/learning_to_zoom.html</loc>
+    <lastmod>2019-08-19T13:38:51.409Z</lastmod>
   </url>  <url>
     <loc>http://wangsc.site/2019/face_cluster.html</loc>
-    <lastmod>2019-08-18T16:12:28.117Z</lastmod>
+    <lastmod>2019-08-19T13:34:54.040Z</lastmod>
   </url>  <url>
     <loc>http://wangsc.site/2019/adverserialMTL.html</loc>
     <lastmod>2019-08-18T16:12:13.491Z</lastmod>
