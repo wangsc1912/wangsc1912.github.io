@@ -1,0 +1,15 @@
+@import "tailwindcss";
+
+.bitcount-single {
+  font-family: "Bitcount Single", system-ui;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
+.nd-blue {
+  color: #0c2340;
+}
+
+.nd-gold {
+  color: #ae9142;
+}

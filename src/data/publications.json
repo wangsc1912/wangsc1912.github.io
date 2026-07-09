@@ -1,0 +1,91 @@
+{
+    "journal": [
+        {
+            "authors": "Shaocong Wang, Yi Li;, Dingchen Wang, Woyu Zhang, Xi Chen, Danian Dong, Songqi Wang, Xumeng Zhang, Peng Lin, Claudio Gallicchio, Xiaoxin Xu, Qi Liu, Kwang-Ting Cheng, Zhongrui Wang*, Dashan Shang*, Ming Liu",
+            "title": "Echo state graph neural networks with analogue random resistive memory arrays",
+            "venue": "Nature Machine Intelligence",
+            "year": 2023,
+            "paper": "https://www.nature.com/articles/s42256-023-00609-5",
+            "code": "https://github.com/wangsc1912/ESGNN",
+            "coverpage": "https://www.nature.com/natmachintell/volumes/5/issues/2"
+        },
+        {
+            "authors": "<strong>Shaocong Wang&dagger;</strong>, Yizhao Gao&dagger;, Yi Li&dagger;, Woyu Zhang, Yifei Yu, Bo Wang, Ning Lin, Hegan Chen, Yue Zhang, Yang Jiang, Dingchen Wang, Jia Chen, Peng Dai, Hao Jiang, Peng Lin, Xumeng Zhang, Xiaojuan Qi, Xiaoxin Xu, Hayden So, Zhongrui Wang*, Dashan Shang*, Qi Liu, Kwang-Ting Cheng, Ming Liu",
+            "title": "Random resistive memory-based deep extreme point learning machine",
+            "venue": "Nature Communications",
+            "year": 2025,
+            "paper": "https://www.nature.com/articles/s41467-025-56079-3",
+            "code": "https://github.com/wangsc1912/DEPLM"   
+        },
+        {
+            "title": "Wearable in-sensor reservoir computing using optoelectronic polymers with through-space charge-transport characteristics for multi-task learning",
+            "year": 2023,
+            "categories": [ "publications" ],
+            "image": "/publications/images/nc2023_reservoir.png",
+            "image_onhover": "/publications/images/nc2023_reservoir.png",
+            "author": "Xiaosong Wu*, Shaocong Wang*, Wei Huang, Yu Dong, Zhongrui Wang, Weiguo Huang",
+            "venue": "Nature Communications",
+            "paper": "https://www.nature.com/articles/s41467-023-36205-9",
+            "code": "https://github.com/wangsc1912/rc_pndi"
+        },
+        {
+            "title": "Resistive memory-based zero-shot liquid state machine for multimodal event data learning",
+            "year": 2025,
+            "categories": [ "publications" ],
+            "image": "/publications/images/ncs_2025.jpg",
+            "image_onhover": "/publications/images/ncs_2025.jpg",
+            "author": "Ning Lin, Shaocong Wang, Yi Li, Bo Wang, Shuhui Shi, Yangu He, Woyu Zhang, Yifei Yu, Yue Zhang, Xiaojuan Qi, Xiaoming Chen, Hao Jiang, Xumeng Zhang, Peng Lin, Xiaoxin Xu, Qi Liu, Zhongrui Wang, Dashan Shang, Ming Liu",
+            "venue": "Nature Computational Science",
+            "paper": "https://www.nature.com/articles/s43588-024-00751-z"
+        },
+        {
+            "title": "Wearable in-sensor reservoir computing using optoelectronic polymers with through-space charge-transport characteristics for multi-task learning",
+            "year": 2023,
+            "categories": [ "publications" ],
+            "image": "/publications/images/nc2023_reservoir.png",
+            "image_onhover": "/publications/images/nc2023_reservoir.png",
+            "author": "Xiaosong Wu*, Shaocong Wang*, Wei Huang, Yu Dong, Zhongrui Wang, Weiguo Huang",
+            "authors": "Xiaosong Wu&dagger;, <strong>Shaocong Wang&dagger;</strong> (co-first author), Wei Huang, Yu Dong, Zhongrui Wang*, Weiguo Huang*",
+            "venue": "Nature Communications",
+            "paper": "https://www.nature.com/articles/s41467-023-36205-9",
+            "code": "https://github.com/wangsc1912/rc_pndi"
+        },
+        {
+            "title": "Wearable in-sensor computing platform based on stretchable organic electrochemical transistors",
+            "year": 2024,
+            "categories": [ "publications" ],
+            "image": "/publications/images/ne_2024_rc.jpg",
+            "image_onhover": "/publications/images/ne_2024_rc.jpg",
+            "authors": "Dingyao Liu&dagger;, Xinyu Tian&dagger;, Jing Bai&dagger;, <strong>Shaocong Wang&dagger;</strong> (co-first author), Shilei Dai, Yan Wang, Zhongrui Wang, Shiming Zhang, Kwang-Ting Cheng, Ming Liu",
+            "venue": "Nature Electronics",
+            "paper": "https://www.nature.com/articles/s41928-024-01250-9"
+        }
+    ],
+    "conference": [
+       
+        {
+            "authors": "Jun Pei#, Shaocong Wang#*, Yian Yang, Jiukai Fang, Jiuxian Zhang, Yuliang Shen, Yujian Du, Yan Wang* and Yuchao Yang*",
+            "title": "Signing Crossbar Columns Instead of Neural Network Weights in Compute-in-Memory Accelerators",
+            "venue": "Design Automation Conference (DAC)",
+            "year": 2026,
+            "location": "Long Beach, USA",
+            "notes": ""
+        },
+        {
+            "authors": "Yiyang Shi, Xinyu Liu, Zhenge Jia* and Shaocong Wang*",
+            "title": "Enabling Robust On-Device Personalization via Pulse-Based Mapping and Noise Suppression for Non-Ideal CIM Architecture",
+            "venue": "Design Automation Conference (DAC)",
+            "year": 2026,
+            "location": "Long Beach, USA",
+            "notes": ""
+        },
+        {
+            "title": "Few-shot graph learning with robust and energy-efficient memory-augmented graph neural network (MAGNN) based on homogeneous computing-in-memory",
+            "year": 2022,
+            "categories": [ "publications" ],
+            "author": "Woyu Zhang, <strong>Shaocong Wang</strong>, Yi Li, Xiaoxin Xu, Danian Dong, Nanjia Jiang, Fei Wang, Zeyu Guo, Renrui Fang, Chunmeng Dou, Kai Ni, Zhongrui Wang, Dashan Shang, Ming Liu",
+            "venue": "2022 IEEE Symposium on VLSI Technology and Circuits (VLSI Technology and Circuits)",
+            "location": "Hawaii, USA"
+        }
+    ]
+}
