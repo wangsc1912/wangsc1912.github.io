@@ -14,7 +14,7 @@ const DirectorSection: React.FC = () => (
                 </div>
                 <figcaption className="text-center text-base text-gray-600 mt-2">Dr. Shaocong Wang</figcaption>
                 <div className="flex justify-center">
-                    <p>scwang@pku.edu.cn </p>
+                    <p>scwang [at] pku.edu.cn </p>
 
                 </div>
             </div>
