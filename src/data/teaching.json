@@ -4,13 +4,15 @@
         "name": "Numerical methods and optimization",
         "level": "Junior",
         "semester": "Spring 2021",
-        "role": "Teaching Assistant"
+        "role": "Teaching Assistant",
+        "place": "University of Hong Kong"
     },
     {
         "code": "ELEC 6049",
         "name": "Digital System Design Techniques",
         "level": "Graduate",
         "semester": "2022/2023",
-        "role": "Teaching Assistant"
+        "role": "Teaching Assistant",
+        "place": "University of Hong Kong"
     }
 ]
