@@ -6,11 +6,11 @@ const RecruitmentSection: React.FC = () => (
             <h2 className="text-2xl font-bold text-stone-700 mb-4">Recruitment</h2>
             <div className="text-base text-gray-700 space-y-4">
                 <p>
-                    We are looking for highly self-motivated Postdocs, Ph.D./Master's students and research assistants interested in memory-centric AI systems, computing-in-memory technologies, hardware/software co-design, and efficient AI hardware.
+                    We are looking for highly self-motivated Ph.D./Master's students and research assistants interested in memory-centric AI systems, computing-in-memory technologies, hardware/software co-design, and efficient AI hardware.
                     Feel free to reach out with a CV, transcripts, and publications if any.
                 </p>
 
-                <p>We are also actively recruiting postdoctoral researchers, with an annual salary of RMB 300,000. Outstanding candidates may apply for Boya Postdoctoral Fellowship, which offers a total annual package of at least RMB 500,000.</p>
+                <p>We are also actively recruiting Postdocs, with an annual salary of RMB 300,000. Outstanding candidates may apply for Boya Postdoctoral Fellowship, which offers a total annual package of at least RMB 500,000.</p>
                 <p>
                     Email: {" "}
                     <a
