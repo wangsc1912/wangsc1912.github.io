@@ -3,6 +3,7 @@ import React from "react";
 const researchThemes = [
     "Memory-Centric AI Systems",
     "Computing-in-Memory Technologies",
+    "(and more generalized) Efficient AI",
 ];
 
 const IntroSection: React.FC = () => (
